@@ -22,17 +22,19 @@ Em linguagem simples:
 
 Aqui segue uma excelente representação visual do fluxo de comunicação:
 
-![Fluxo de comunicação do MCP](../resources/mcp-fluxo.png)
+<p align="center">
+  <img src="../resources/mcp-fluxo.png" alt="Fluxo de comunicação do MCP" />
+</p>
 
 > A aplicação de IA não precisa aprender uma forma completamente diferente de comunicação para cada sistema. O MCP oferece uma linguagem comum para solicitar dados ou ações e receber resultados.
 
 Esse acordo define como uma conexão começa, como cada lado anuncia o que sabe fazer, como uma capacidade é descoberta e utilizada e como sucessos ou erros são devolvidos.
 
-MCP, porém, não é um Large Language Model (LLM), um agente, um banco de dados ou uma API de negócio. Também não é uma ferramenta de segurança nem uma garantia de que toda integração seja confiável. O protocolo organiza a comunicação; as regras de negócio, permissões, validações, aprovações e proteções continuam sendo responsabilidade da aplicação e da infraestrutura.
+MCP, porém, não é um Large Language Model (LLM), um agente, um banco de dados ou uma API de negócio. Também não é uma ferramenta de segurança nem uma garantia de que toda integração seja confiável. O protocolo organiza a comunicação. Por outro lado, as regras de negócio, permissões, validações, aprovações e proteções continuam sendo responsabilidade da aplicação e da infraestrutura.
 
 ## Uma analogia: empresa, linhas telefônicas e departamentos
 
-Imagine uma empresa formada por uma pessoa coordenadora e vários departamentos especializados. A coordenadora recebe um pedido, identifica qual departamento consegue atendê-lo e utiliza uma linha telefônica dedicada para conversar com esse departamento. O departamento informa quais serviços oferece, executa o trabalho solicitado e devolve o resultado pela mesma linha.
+Imagine uma empresa formada por uma pessoa coordenadora e vários departamentos especializados. A coordenadora recebe um pedido, identifica qual departamento consegue atender a pessoa e utiliza uma linha telefônica dedicada para conversar com esse departamento. O departamento informa quais serviços oferece, executa o trabalho solicitado e devolve o resultado pela mesma linha.
 
 Podemos relacionar essa empresa à arquitetura MCP:
 
@@ -55,7 +57,7 @@ O **MCP Host** é a aplicação de IA com a qual a pessoa interage. Um editor de
 
 O Host recebe a solicitação do usuário e coordena a utilização do LLM. Ele também cria e gerencia os MCP Clients, decide quais Servers podem ser conectados e reúne as capacidades oferecidas por eles. É ainda no limite do Host que normalmente aparecem decisões de consentimento, integração com o modelo e apresentação da resposta final.
 
-No nosso cenário, uma aplicação de análise de risco poderia atuar como Host. Entretanto, este repositório começará pela construção do MCP Server; não criaremos agora um Host completo.
+No nosso cenário, uma aplicação de análise de risco poderia atuar como Host. Entretanto, este repositório começará pela criação do MCP Server. Não criaremos agora um Host completo.
 
 ### MCP Client: a conexão dedicada
 
@@ -69,21 +71,17 @@ A relação central pode ser resumida assim:
 
 Se o Host utilizar três Servers, normalmente criará três Clients separados.
 
-```mermaid
-flowchart LR
-    H["MCP Host"] --> C1["MCP Client A"]
-    H --> C2["MCP Client B"]
-    C1 --> S1["MCP Server de Risco"]
-    C2 --> S2["MCP Server de Documentos"]
-```
+<p align="center">
+  <img src="../resources/mcp-host-fluxo.png" alt="Fluxo de comunicação do MCP Host" />
+</p>
 
-O Server de Risco não deveria enxergar automaticamente a conversa mantida com o Server de Documentos. O Host coordena o que será compartilhado com cada conexão.
+O MCP Server de Risco não deveria enxergar automaticamente a conversa mantida com o MCP Server de Documentos. O Host coordena o que será compartilhado com cada conexão.
 
 ### MCP Server: quem fornece capacidades
 
 O **MCP Server** é o programa que expõe capacidades utilizando o protocolo MCP. Essas capacidades podem executar ações, fornecer informações, oferecer modelos reutilizáveis de interação ou comunicar mudanças.
 
-Um Server pode rodar localmente, na mesma máquina do Host, ou remotamente, como um serviço acessado pela rede. Portanto, a palavra “Server” descreve o papel do programa na comunicação; ela não significa obrigatoriamente uma máquina remota.
+Um _Server_ pode rodar localmente, na mesma máquina do Host, ou remotamente, como um serviço acessado pela rede. Portanto, a palavra _“Server”_ descreve o papel do programa na comunicação. Ela não significa obrigatoriamente uma máquina remota.
 
 Nosso **Enterprise Risk Knowledge MCP Server** será o departamento especializado em políticas e casos fictícios de risco.
 
@@ -129,7 +127,7 @@ A **transport layer**, ou camada de transporte, define por onde as mensagens via
 
 Uma analogia simples ajuda a separar as duas responsabilidades:
 
-> A camada de dados é o idioma e o formato da carta. A camada de transporte é o meio utilizado para entregá-la.
+> A camada de dados é o idioma e o formato da carta. A camada de transporte é o meio utilizado para entregar essa carta.
 
 A mesma mensagem MCP pode viajar por STDIO ou Streamable HTTP. O conteúdo segue o protocolo; o caminho utilizado para transportá-lo é diferente.
 
@@ -196,14 +194,9 @@ O SDK TypeScript cuidará de grande parte desses detalhes. Mesmo assim, compreen
 
 MCP é um protocolo com ciclo de vida. Client e Server não deveriam começar executando operações sem antes se apresentarem e negociarem suas capacidades.
 
-```mermaid
-flowchart TD
-    A["1. Client envia initialize"] --> B["2. Server responde com versão e capacidades"]
-    B --> C["3. Client envia initialized"]
-    C --> D["4. Client descobre Tools, Resources ou Prompts"]
-    D --> E["5. Client utiliza as capacidades"]
-    E --> F["6. Conexão é encerrada"]
-```
+<p align="center">
+  <img src="../resources/mcp-life-cycle.svg" alt="MCP Life Cycle" />
+</p>
 
 O Client inicia enviando `initialize`. O Server responde informando a versão de protocolo e as capacidades que suporta. Quando essa negociação termina, o Client envia `notifications/initialized` para comunicar que está pronto. Somente depois começa a descoberta e a utilização das capacidades.
 
@@ -215,13 +208,13 @@ Em linguagem simples:
 
 ## As primitivas oferecidas pelo MCP Server
 
-Uma **primitive**, ou primitiva, é uma forma básica de capacidade definida pelo protocolo. Um MCP Server pode expor três primitivas principais: Tools, Resources e Prompts. Elas não são nomes diferentes para a mesma coisa; cada uma resolve um tipo específico de necessidade.
+Uma **primitive**, ou primitiva, é uma forma básica de capacidade definida pelo protocolo. Um MCP Server pode expor três primitivas principais: Tools, Resources e Prompts. Elas não são nomes diferentes para a mesma coisa. Cada uma resolve um tipo específico de necessidade.
 
 ### Tools: quando precisamos executar algo
 
-Uma **Tool** representa uma função que pode ser invocada para consultar ou alterar algo. Consultar detalhes de um caso, pesquisar registros, criar um relatório ou enviar uma solicitação são exemplos possíveis.
+Uma **[Tool](https://modelcontextprotocol.io/specification/2025-11-25/server/tools)** representa uma função que pode ser invocada para consultar ou alterar algo. Consultar detalhes de um caso, pesquisar registros, criar um relatório ou enviar uma solicitação são exemplos possíveis.
 
-No nosso projeto, `risk.get_case_details` será uma Tool porque recebe argumentos, executa uma lógica e devolve um resultado.
+No nosso projeto, `risk.get_case_details` será uma _Tool_ porque recebe argumentos, executa uma lógica e devolve um resultado.
 
 Uma Tool anuncia um nome, uma descrição e um schema de entrada. Também pode possuir um schema de saída. Esses metadados ajudam o Client e o modelo a compreenderem quando e como a capacidade deve ser utilizada.
 
@@ -229,7 +222,7 @@ Uma Tool anuncia um nome, uma descrição e um schema de entrada. Também pode p
 
 ### Resources: quando precisamos ler informação
 
-Um **Resource** representa um dado que pode ser lido e utilizado como contexto. O conteúdo de um arquivo, um manual de políticas, um schema de banco de dados ou um catálogo de documentos são exemplos de Resources.
+Um **[Resource](https://modelcontextprotocol.io/specification/2025-11-25/server/resources)** representa um dado que pode ser lido e utilizado como contexto. O conteúdo de um arquivo, um manual de políticas, um schema de banco de dados ou um catálogo de documentos são exemplos de Resources.
 
 Um Resource é identificado por uma URI. Poderíamos, por exemplo, utilizar:
 
@@ -237,13 +230,13 @@ Um Resource é identificado por uma URI. Poderíamos, por exemplo, utilizar:
 risk://policies/catalog
 ```
 
-No nosso projeto, esse endereço poderia representar um catálogo fictício de políticas. Isso ainda será decidido em outra parte; não estamos implementando o Resource agora.
+No nosso projeto, esse endereço poderia representar um catálogo fictício de políticas. Isso ainda será decidido em outra parte. Não estamos implementando o Resource agora.
 
 A diferença essencial é que uma Tool solicita a execução de uma operação, enquanto um Resource disponibiliza uma informação para leitura.
 
 ### Prompts: quando precisamos reutilizar uma estrutura
 
-Um **Prompt** representa um modelo reutilizável para estruturar uma interação. Ele pode conter um roteiro para revisar um caso, as perguntas obrigatórias de uma investigação ou uma sequência de mensagens com instruções e exemplos.
+Um **[Prompt](https://modelcontextprotocol.io/specification/2025-11-25/server/prompts)** representa um modelo reutilizável para estruturar uma interação. Ele pode conter um roteiro para revisar um caso, as perguntas obrigatórias de uma investigação ou uma sequência de mensagens com instruções e exemplos.
 
 Poderíamos futuramente oferecer:
 
@@ -259,9 +252,9 @@ Esse Prompt prepararia uma estrutura de revisão, mas não executaria sozinho um
 
 | Primitiva | Pergunta simples | Exemplo no domínio |
 |---|---|---|
-| Tool | “O que posso executar?” | Consultar detalhes de um caso |
-| Resource | “Que informação posso ler?” | Catálogo de políticas |
-| Prompt | “Que modelo de interação posso reutilizar?” | Roteiro de revisão de risco |
+| _Tool_ | “O que posso executar?” | Consultar detalhes de um caso |
+| _Resource_ | “Que informação posso ler?” | Catálogo de políticas |
+| _Prompt_ | “Que modelo de interação posso reutilizar?” | Roteiro de revisão de risco |
 
 ## Como o Client descobre as capacidades?
 
@@ -273,18 +266,15 @@ A flexibilidade é útil, mas também cria uma preocupação de segurança: o Ho
 
 ## O que são transports?
 
-Um **transport**, ou transporte, é o mecanismo utilizado para levar as mensagens entre Client e Server. A especificação do MCP define dois transportes principais: STDIO e Streamable HTTP.
+Um **[transport](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports)**, ou transporte, é o mecanismo utilizado para levar as mensagens entre Client e Server. A especificação do MCP define dois transportes principais: STDIO e Streamable HTTP.
 
 ### STDIO: comunicação entre processos locais
 
 STDIO significa **standard input/output**, ou entrada e saída padrão. Nesse modelo, o Host inicia o MCP Server como um processo local. O Client envia mensagens pela entrada padrão do processo, chamada `stdin`, e o Server devolve mensagens pela saída padrão, chamada `stdout`.
 
-```mermaid
-flowchart LR
-    H["Host"] --> C["MCP Client"]
-    C -->|"stdin"| S["MCP Server local"]
-    S -->|"stdout"| C
-```
+<p align="center">
+  <img src="../resources/stdin-stdout-mcp.svg" alt="STDIO MCP Communication" />
+</p>
 
 Como não precisamos criar um endpoint HTTP, STDIO oferece um caminho simples para desenvolvimento local e possui pouca sobrecarga de comunicação. Por isso, será adequado para observarmos o funcionamento básico do protocolo na Parte 3.
 
@@ -294,11 +284,9 @@ Essa simplicidade não elimina os riscos. A saída padrão é o canal do protoco
 
 No Streamable HTTP, o Server é acessado por HTTP. O Client envia mensagens usando HTTP POST, e o Server pode utilizar Server-Sent Events quando precisa transmitir dados progressivamente.
 
-```mermaid
-flowchart LR
-    H["Host"] --> C["MCP Client"]
-    C -->|"HTTPS"| S["MCP Server remoto"]
-```
+<p align="center">
+  <img src="../resources/streamable-http-mcp.svg" alt="Streamable HTTP MCP Communication" />
+</p>
 
 Esse transporte permite que um serviço remoto atenda vários Clients e se integre à infraestrutura web da organização. Em contrapartida, a comunicação por rede aumenta a superfície exposta e introduz preocupações com autenticação, autorização, TLS, sessões, origem, limites de uso e observabilidade.
 
@@ -317,11 +305,11 @@ Um MCP Server remoto não se torna enterprise apenas por utilizar HTTPS. O canal
 
 ## Por que começaremos com STDIO?
 
-Na Parte 3 construiremos primeiro um MCP Server mínimo com STDIO. Essa é uma **decisão didática deste projeto**, não uma exigência da NSA nem uma regra de que STDIO seja sempre melhor.
+Na Parte 3 criaremos primeiro um MCP Server mínimo com _STDIO_. Essa é uma **decisão didática deste projeto**. Não é uma exigência da NSA nem uma regra de que STDIO seja sempre melhor.
 
 Com STDIO, conseguiremos observar inicialização, descoberta, execução de Tool, mensagens e comportamento do SDK antes de introduzir endpoints HTTP, autenticação remota, sessões web e infraestrutura de rede.
 
-Mais tarde, evoluiremos o projeto para Streamable HTTP quando precisarmos representar um cenário remoto e aplicar controles enterprise correspondentes.
+Mais tarde, evoluiremos o projeto para _Streamable HTTP_ quando precisarmos representar um cenário remoto e aplicar controles enterprise correspondentes.
 
 ## Onde começam as fronteiras de confiança?
 
@@ -331,33 +319,32 @@ Em linguagem simples:
 
 > Sempre que uma informação atravessa de uma parte do sistema para outra, precisamos perguntar se o lado que recebe pode confiar nela.
 
-```mermaid
-flowchart LR
-    U["Usuário"] --> H["MCP Host"]
-    H --> C["MCP Client"]
-    C --> S["MCP Server"]
-    S --> D["Dados ou serviço externo"]
-```
+<p align="center">
+  <img src="../resources/trust-boundary.svg" alt="Trust Boundary" />
+</p>
 
-Quando o usuário envia um texto, o Host não deveria presumir que ele é seguro. Quando o Server anuncia uma Tool, o Client não deveria considerar sua descrição confiável apenas por estar no formato esperado. Da mesma maneira, o Server precisa validar os argumentos recebidos, e o Host precisa examinar o resultado devolvido pela Tool antes de utilizá-lo em outra etapa.
 
-Também precisamos perguntar se um Server deveria conhecer dados provenientes de outro Server. Segundo os princípios arquiteturais do MCP, cada conexão deve permanecer isolada, e o Host controla o contexto compartilhado.
+Quando o usuário envia um texto, o _Host_ não deveria presumir que ele é seguro. Quando o Server anuncia uma _Tool_, o _Client_ não deveria considerar sua descrição confiável apenas por estar no formato esperado. Da mesma maneira, o _Server_ precisa validar os argumentos recebidos, e o _Host_ precisa examinar o resultado devolvido pela Tool antes de utilizá-lo em outra etapa.
+
+Também precisamos perguntar se um _Server_ deveria conhecer dados provenientes de outro _Server_. Segundo os princípios arquiteturais do MCP, cada conexão deve permanecer isolada, e o _Host_ controla o contexto compartilhado.
 
 A resposta segura não é simplesmente “sim, podemos confiar”. Cada transição precisa de validação, autorização, limitação ou monitoramento proporcional ao risco.
 
 ## Relação com o relatório da NSA
 
-Até aqui estudamos a arquitetura definida pelo MCP. Agora conseguimos relacioná-la às preocupações descritas pela NSA.
+Até aqui estudamos a arquitetura definida pelo MCP. Agora conseguimos relacionar sobre a perspectiva de segurança, conforme às preocupações descritas pelo NSA.
 
-O primeiro ponto é a **invocação dinâmica de Tools**. Um Client pode descobrir capacidades em tempo de execução, mas uma Tool nova ou modificada não deveria receber confiança automaticamente.
+Vários pontos do relatório da NSA se aplicam à arquitetura MCP. Entre eles, podemos destacar cinco preocupações que merecem atenção especial:
 
-O segundo é a **confiança implícita**. O resultado de uma Tool pode passar do Server para o Host e depois ser utilizado pelo LLM ou por outro componente. Se todos presumirem que esse resultado é seguro, uma instrução maliciosa pode se propagar pela cadeia.
+- O primeiro ponto é a **invocação dinâmica de Tools**. Um _Client_ pode descobrir capacidades em tempo de execução, mas uma _Tool_ nova ou modificada não deveria receber confiança automaticamente.
 
-O terceiro é o **compartilhamento de contexto**. Como o Host coordena vários Clients e Servers, precisa controlar qual informação será entregue a cada conexão. Um Server não deveria receber automaticamente toda a conversa ou dados pertencentes a outro Server.
+- O segundo é a **confiança implícita**. O resultado de uma _Tool_ pode passar do _Server_ para o _Host_ e depois ser utilizado pelo LLM ou por outro componente. Se todos presumirem que esse resultado é seguro, uma instrução maliciosa pode se propagar pela cadeia.
 
-O quarto ponto é que **validação e autorização não aparecem automaticamente**. O protocolo oferece um formato de comunicação, mas não conhece as regras do nosso domínio. Ele não sabe, por exemplo, quais casos a analista Ana pode consultar. Essa regra pertence à aplicação e precisará ser implementada por nós.
+- O terceiro é o **compartilhamento de contexto**. Como o _Host_ coordena vários _Clients_ e _Servers_, precisa controlar qual informação será entregue a cada conexão. Um _Server_ não deveria receber automaticamente toda a conversa ou dados pertencentes a outro _Server_.
 
-Por fim, o **transporte não substitui segurança**. Utilizar HTTP, HTTPS ou um SDK oficial não resolve sozinho falhas de controle de acesso, excesso de privilégios, indirect prompt injection, replay, falta de aprovação, ausência de logs ou Tool poisoning.
+- O quarto ponto é que **validação e autorização não aparecem automaticamente**. O protocolo oferece um formato de comunicação, mas não conhece as regras do nosso domínio. Ele não sabe, por exemplo, quais casos a analista Ana pode consultar. Essa regra pertence à aplicação e precisará ser implementada por nós.
+
+- Por fim, o **transporte não substitui segurança**. Utilizar HTTP, HTTPS ou um SDK oficial não resolve sozinho falhas de controle de acesso, excesso de privilégios, indirect prompt injection, replay, falta de aprovação, ausência de logs ou _Tool_ poisoning.
 
 Essa é a primeira ligação entre arquitetura MCP e segurança enterprise:
 
@@ -365,7 +352,7 @@ Essa é a primeira ligação entre arquitetura MCP e segurança enterprise:
 
 ## Protocolo, recomendação e decisão do projeto
 
-Durante o tutorial, manteremos três fontes de decisão separadas. A especificação do MCP define, por exemplo, que um Host cria um Client dedicado para cada Server. A NSA recomenda que organizações definam fronteiras claras entre componentes e zonas. Já começar a implementação por STDIO é uma decisão didática deste projeto. Por fim, limitar cada usuário aos casos do seu escopo é uma regra do nosso domínio fictício.
+Durante o tutorial, manteremos três fontes de decisão separadas. A especificação do MCP define, por exemplo, que um _Host_ cria um _Client_ dedicado para cada _Server_. A NSA recomenda que organizações definam fronteiras claras entre componentes e zonas. Já começar a implementação por _STDIO_ é uma decisão didática deste projeto. Por fim, limitar cada usuário aos casos do seu escopo é uma regra do nosso domínio fictício.
 
 | Categoria | Exemplo desta parte |
 |---|---|
@@ -378,11 +365,11 @@ Essa separação impedirá que uma decisão nossa seja apresentada incorretament
 
 ## O que aprendemos nesta parte?
 
-MCP padroniza a comunicação entre aplicações de IA e sistemas externos. O Host coordena a experiência, o LLM e os Clients. Cada Client mantém uma conexão com um Server específico, enquanto o Server oferece capacidades especializadas.
+MCP padroniza a comunicação entre aplicações de IA e sistemas externos. O _Host_ coordena a experiência, o LLM e os _Clients_. Cada _Client_ mantém uma conexão com um _Server_ específico, enquanto o _Server_ oferece capacidades especializadas.
 
-Na camada de dados, MCP utiliza JSON-RPC 2.0 para definir mensagens e operações. Na camada de transporte, STDIO ou Streamable HTTP carregam essas mensagens. Tools executam operações, Resources disponibilizam informações e Prompts oferecem estruturas reutilizáveis.
+Na camada de dados, MCP utiliza _JSON-RPC 2.0_ para definir mensagens e operações. Na camada de transporte, _STDIO_ ou _Streamable HTTP_ carregam essas mensagens. _Tools_ executam operações, _Resources_ disponibilizam informações e _Prompts_ oferecem estruturas reutilizáveis.
 
-Para o primeiro laboratório, utilizaremos STDIO. Mais adiante, introduziremos Streamable HTTP. Em qualquer um dos casos, as transições entre usuário, Host, Client, Server e sistemas externos precisam ser tratadas como possíveis fronteiras de confiança. O protocolo não implementa automaticamente as regras de segurança do nosso domínio.
+Para o primeiro laboratório, utilizaremos _STDIO_. Mais adiante, introduziremos _Streamable HTTP_. Em qualquer um dos casos, as transições entre usuário, _Host_, _Client_, _Server_ e sistemas externos precisam ser tratadas como possíveis fronteiras de confiança. O protocolo não implementa automaticamente as regras de segurança do nosso domínio.
 
 ## Verifique seu entendimento
 
