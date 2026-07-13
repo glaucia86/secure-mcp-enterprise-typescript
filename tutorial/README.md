@@ -24,7 +24,7 @@ A linguagem será acessível para quem ainda não conhece MCP, sem remover a pre
 | [2](./02-mcp-fundamentals.md) | Fundamentos e arquitetura do MCP | Modelo mental de Host, Client, Server e primitivas | Em revisão |
 | 3 | MCP Server mínimo em TypeScript | Servidor local executável | Planejada |
 | 4 | Enterprise Risk Knowledge | Domínio, tools e dados fictícios | Planejada |
-| 5 | Threat model e trust boundaries | Atores, ativos, fluxos e fronteiras | Planejada |
+| 5 | Threat model e fronteiras de confiança | Atores, ativos, fluxos e fronteiras | Planejada |
 | 6 | Validação de parâmetros | Schemas, limites e bloqueio de forwarding | Planejada |
 | 7 | Identidade e autorização | Autenticação, RBAC/ABAC e least privilege | Planejada |
 | 8 | Aprovação humana | Consentimento informado para ações sensíveis | Planejada |
