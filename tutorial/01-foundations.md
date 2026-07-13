@@ -1,14 +1,14 @@
-# Parte 1 — Fundação, escopo e critérios do projeto
+# Parte 1: Fundação, escopo e critérios do projeto
 
-## O que construiremos
+## O que criaremos?
 
 Criaremos progressivamente um **MCP Server em TypeScript** chamado **Enterprise Risk Knowledge MCP Server**. Ele simulará o acesso a políticas e casos corporativos de risco com diferentes níveis de sensibilidade.
 
-Esse projeto tem como inspiração o relatório da NSA [Model Context Protocol (MCP): Security Design Considerations for AI-Driven Automation](https://www.nsa.gov/Portals/75/documents/Cybersecurity/CSI_MCP_SECURITY.pdf), que descreve riscos e recomendações de segurança para o protocolo MCP.
+Esse projeto tem como inspiração o relatório da NSA **[Model Context Protocol (MCP): Security Design Considerations for AI-Driven Automation](https://www.nsa.gov/Portals/75/documents/Cybersecurity/CSI_MCP_SECURITY.pdf)**, que descreve riscos e recomendações de segurança para o protocolo MCP.
 
 O objetivo não é apresentar uma arquitetura universal. O objetivo é criar um laboratório reproduzível no qual seja possível observar como decisões inseguras surgem e como controles enterprise podem reduzir esses riscos.
 
-## Por que começar pela fundação
+## Por que começar pela fundação?
 
 O relatório da NSA destaca que a postura de segurança do MCP depende fortemente da disciplina da implementação. Autenticação, autorização, validação, isolamento, observabilidade e ciclo de vida não podem ser presumidos apenas porque uma integração utiliza MCP.
 
@@ -33,7 +33,7 @@ Este tutorial é destinado a pessoas desenvolvedoras que:
 
 Não é necessário conhecimento prévio de MCP. Conceitos de segurança serão apresentados no momento em que se tornarem necessários.
 
-## O que significa enterprise neste projeto
+## O que significa enterprise neste projeto?
 
 Neste tutorial, **enterprise** não significa adicionar várias ferramentas ou tornar o código excessivamente complexo. Significa considerar explicitamente:
 
@@ -61,7 +61,7 @@ A empresa fictícia **Northstar Financial Services** mantém políticas corporat
 
 A classificação **pública** significa que o conteúdo pode ser consultado sem uma autorização especial. Isso não garante que o conteúdo esteja correto ou seja seguro.
 
-A `public.get_policy_summary` retornará um resumo previamente armazenado; ela não utilizará outro LLM para produzir o resumo. Mesmo assim, o conteúdo pode ter sido alterado e conter instruções maliciosas escondidas. Caso um cliente ou agente interprete essas instruções como comandos, poderá ocorrer uma **indirect prompt injection**.
+A `public.get_policy_summary` retornará um resumo previamente armazenado, pois ela não utilizará outro LLM para produzir o resumo. Mesmo assim, o conteúdo pode ter sido alterado e conter instruções maliciosas escondidas. Caso um cliente ou agente interprete essas instruções como comandos, poderá ocorrer uma **indirect prompt injection**.
 
 > Dado público não é sinônimo de dado confiável.
 
