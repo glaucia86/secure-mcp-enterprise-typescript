@@ -10,6 +10,12 @@ Não apresentaremos código sem explicar qual problema ele resolve. Também não
 - **Requisito ou comportamento do MCP**;
 - **Decisão arquitetural do projeto**.
 
+O texto deverá se aproximar da leitura de um livro técnico passo a passo. A narrativa contínua será o formato principal, conectando um conceito ao seguinte. Bullet points poderão ser utilizados quando facilitarem a leitura ou evitarem um parágrafo artificial, mas não deverão dominar o capítulo.
+
+Diagramas Mermaid serão utilizados quando fluxos, sequências, componentes, fronteiras de confiança ou comparações forem mais fáceis de compreender visualmente. Os diagramas deverão permanecer simples e poderão ser redesenhados posteriormente no [tldraw](https://www.tldraw.com/) para publicação.
+
+A linguagem será acessível para quem ainda não conhece MCP, sem remover a precisão técnica nem simplificar indevidamente as recomendações do guia da NSA. Sempre que possível, apresentaremos primeiro o problema em linguagem cotidiana e depois o termo técnico correspondente.
+
 ## Roteiro progressivo
 
 | Parte | Tema | Entrega principal | Status |
