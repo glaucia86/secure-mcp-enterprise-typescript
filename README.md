@@ -7,7 +7,7 @@
 [![MCP](https://img.shields.io/badge/Model%20Context%20Protocol-MCP-7C3AED?style=for-the-badge)](https://modelcontextprotocol.io/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
-[![Security](https://img.shields.io/badge/Focus-Security-DC2626?style=for-the-badge&logo=securityscorecard&logoColor=white)](https://www.nsa.gov/Press-Room/Press-Releases-Statements/Press-Release-View/Article/4271962/nsa-and-partners-release-guidance-on-security-considerations-for-mcp/)
+[![Security](https://img.shields.io/badge/Focus-Security-DC2626?style=for-the-badge&logo=securityscorecard&logoColor=white)](https://www.nsa.gov/Portals/75/documents/Cybersecurity/CSI_MCP_SECURITY.pdf)
 [![Tutorial](https://img.shields.io/badge/Tutorial-Português-009C3B?style=for-the-badge)](./tutorial/README.md)
 [![License](https://img.shields.io/badge/License-MIT-22C55E?style=for-the-badge)](./LICENSE)
 
@@ -143,7 +143,7 @@ Software Engineer • JavaScript/TypeScript • Inteligência Artificial • Clo
 
 [![GitHub](https://img.shields.io/badge/GitHub-glaucia86-181717?style=for-the-badge&logo=github)](https://github.com/glaucia86)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Glaucia%20Lemos-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/glaucialemos/)
-[![X](https://img.shields.io/badge/X-@glaucia__lemos86-000000?style=for-the-badge&logo=x&logoColor=white)](https://twitter.com/glaucia_lemos86)
+[![X](https://img.shields.io/badge/X-Glaucia%20Lemos-000000?style=for-the-badge&logo=x&logoColor=white)](https://twitter.com/glaucia_lemos86)
 [![YouTube](https://img.shields.io/badge/YouTube-Glaucia%20Lemos-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@GlauciaLemos)
 [![DEV.to](https://img.shields.io/badge/DEV.to-glaucia86-0A0A0A?style=for-the-badge&logo=devdotto&logoColor=white)](https://dev.to/glaucia86)
 [![Twitch](https://img.shields.io/badge/Twitch-glaucia__lemos86-9146FF?style=for-the-badge&logo=twitch&logoColor=white)](https://www.twitch.tv/glaucia_lemos86)
