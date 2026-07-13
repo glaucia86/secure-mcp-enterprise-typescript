@@ -6,7 +6,7 @@ Antes de escrever qualquer código, precisamos construir um modelo mental simple
 
 Durante esta parte, acompanharemos uma solicitação desde o momento em que a pessoa conversa com uma aplicação de inteligência artificial até o instante em que um MCP Server devolve um resultado. Nesse caminho, conheceremos MCP Host, MCP Client, MCP Server, Tools, Resources, Prompts, JSON-RPC 2.0 e os transportes STDIO e Streamable HTTP.
 
-Ainda não construiremos o servidor. Primeiro entenderemos as peças; na Parte 3, começaremos a programá-las.
+Ainda não criaremos o servidor. Primeiro entenderemos as peças. Aí sim, na Parte 3, começaremos a implementar.
 
 ## Afinal, qual problema o MCP resolve?
 
@@ -19,6 +19,12 @@ O MCP oferece uma forma padronizada para aplicações de IA descobrirem capacida
 Em linguagem simples:
 
 > MCP é um acordo de comunicação entre uma aplicação de IA e os sistemas que fornecem dados ou executam ações.
+
+Aqui segue uma excelente representação visual do fluxo de comunicação:
+
+![Fluxo de comunicação do MCP](../resources/mcp-fluxo.png)
+
+> A aplicação de IA não precisa aprender uma forma completamente diferente de comunicação para cada sistema. O MCP oferece uma linguagem comum para solicitar dados ou ações e receber resultados.
 
 Esse acordo define como uma conexão começa, como cada lado anuncia o que sabe fazer, como uma capacidade é descoberta e utilizada e como sucessos ou erros são devolvidos.
 
