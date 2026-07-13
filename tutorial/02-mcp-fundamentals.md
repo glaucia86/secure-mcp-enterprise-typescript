@@ -335,7 +335,6 @@ Definir uma fronteira clara significa saber onde termina a responsabilidade de u
   <img src="../resources/trust-boundary.svg" alt="Trust Boundary" />
 </p>
 
-
 Quando o usuário envia um texto, o _Host_ não deveria presumir que ele é seguro. Quando o Server anuncia uma _Tool_, o _Client_ não deveria considerar sua descrição confiável apenas por estar no formato esperado. Da mesma maneira, o _Server_ precisa validar os argumentos recebidos, e o _Host_ precisa examinar o resultado devolvido pela Tool antes de utilizá-lo em outra etapa.
 
 Também precisamos perguntar se um _Server_ deveria conhecer dados provenientes de outro _Server_. Segundo os princípios arquiteturais do MCP, cada conexão deve permanecer isolada, e o _Host_ controla o contexto compartilhado.
@@ -352,12 +351,12 @@ Vários pontos do relatório da NSA se aplicam à arquitetura MCP. Entre eles, p
 
 > Descobrir uma capacidade não significa confiar nela.
 
-```mermaid
-flowchart LR
-    A["Server anuncia uma Tool"] --> B{"A Tool já foi avaliada?"}
-    B -->|"Sim"| C["Aplicar as permissões aprovadas"]
-    B -->|"Não"| D["Bloquear ou solicitar avaliação"]
-```
+<p align="center">
+  <img src="../resources/descoberta-capacidade.svg" alt="Descoberta de capacidade não equivale a autorização" />
+</p>
+
+> [!NOTE]
+> Esse flowchart não descreve uma funcionalidade automática e obrigatória da especificação MCP. Ele representa um controle de segurança que uma arquitetura enterprise pode implementar para evitar confiança automática em Tools novas ou alteradas.
 
 - O segundo é a **confiança implícita**. O resultado de uma _Tool_ pode passar do _Server_ para o _Host_ e depois ser utilizado pelo LLM ou por outro componente. Se todos presumirem que esse resultado é seguro, uma instrução maliciosa pode se propagar pela cadeia.
 
