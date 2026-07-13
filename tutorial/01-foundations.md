@@ -135,7 +135,7 @@ Começaremos com os fundamentos e um servidor mínimo. Em seguida, adicionaremos
 
 ## Próxima parte
 
-Na [Parte 2](./README.md), estudaremos o modelo mental do MCP: host, client, server, tools, resources, prompts, mensagens e transportes. Ainda não adicionaremos controles enterprise antes de compreender o protocolo.
+Na Parte 2 (planejada; ver o [índice do tutorial](./README.md)), estudaremos o modelo mental do MCP: host, client, server, tools, resources, prompts, mensagens e transportes. Ainda não adicionaremos controles enterprise antes de compreender o protocolo.
 
 ## Referências
 
