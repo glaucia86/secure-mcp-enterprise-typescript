@@ -2,7 +2,9 @@
 
 ## O que construiremos
 
-Construiremos progressivamente um **MCP Server em TypeScript** chamado **Enterprise Risk Knowledge MCP Server**. Ele simulará o acesso a políticas e casos corporativos de risco com diferentes níveis de sensibilidade.
+Criaremos progressivamente um **MCP Server em TypeScript** chamado **Enterprise Risk Knowledge MCP Server**. Ele simulará o acesso a políticas e casos corporativos de risco com diferentes níveis de sensibilidade.
+
+Esse projeto tem como inspiração o relatório da NSA [Model Context Protocol (MCP): Security Design Considerations for AI-Driven Automation](https://www.nsa.gov/Portals/75/documents/Cybersecurity/CSI_MCP_SECURITY.pdf), que descreve riscos e recomendações de segurança para o protocolo MCP.
 
 O objetivo não é apresentar uma arquitetura universal. O objetivo é criar um laboratório reproduzível no qual seja possível observar como decisões inseguras surgem e como controles enterprise podem reduzir esses riscos.
 
@@ -50,10 +52,10 @@ A empresa fictícia **Northstar Financial Services** mantém políticas corporat
 
 | Tool | Classificação inicial | Propósito | Risco principal |
 |---|---|---|---|
-| `public.get_policy_summary` | Pública | Resumir políticas públicas | Conteúdo malformado ou envenenado |
-| `risk.search_cases` | Interna | Pesquisar casos permitidos | Enumeração e vazamento entre escopos |
-| `risk.get_case_details` | Restrita | Consultar detalhes de um caso | Broken access control |
-| `risk.export_case_report` | Sensível | Exportar relatório | Exfiltração e ação sem consentimento |
+| `public.get_policy_summary` | Pública | Resumir políticas públicas | Instruções maliciosas escondidas no conteúdo |
+| `risk.search_cases` | Interna | Pesquisar casos permitidos | Exposição de casos pertencentes a outro escopo |
+| `risk.get_case_details` | Restrita | Consultar detalhes de um caso | Acesso a casos sem a permissão necessária |
+| `risk.export_case_report` | Sensível | Exportar relatório | Exportação de dados sem autorização ou aprovação |
 
 Os nomes, usuários, políticas e casos serão inteiramente fictícios.
 

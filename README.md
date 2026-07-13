@@ -1,6 +1,6 @@
 # Secure MCP Enterprise with TypeScript
 
-Projeto educacional para aprender **Model Context Protocol (MCP) com TypeScript** e evoluir um servidor MCP até um exemplo de segurança de nível enterprise, tomando como referência o relatório da NSA [Model Context Protocol (MCP): Security Design Considerations for AI-Driven Automation](https://www.nsa.gov/Portals/75/documents/Cybersecurity/CSI_MCP_SECURITY.pdf).
+Projeto educacional para aprender **Model Context Protocol (MCP) com TypeScript** e evoluir um servidor MCP até um exemplo de segurança de nível enterprise, tomando como referência o relatório da NSA **[Model Context Protocol (MCP): Security Design Considerations for AI-Driven Automation](https://www.nsa.gov/Portals/75/documents/Cybersecurity/CSI_MCP_SECURITY.pdf)**.
 
 > [!IMPORTANT]
 > Este projeto é independente, educacional e não representa certificação, homologação ou conformidade oficial da NSA. O relatório apresenta riscos e recomendações; as decisões arquiteturais e implementações deste repositório são interpretações técnicas explicitamente documentadas.
