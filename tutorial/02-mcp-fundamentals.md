@@ -2,7 +2,7 @@
 
 ## O que aprenderemos nesta parte?
 
-Antes de escrever código, precisamos construir um modelo mental simples do Model Context Protocol (MCP).
+Antes de escrever código, precisamos criar um modelo mental simples do Model Context Protocol (MCP).
 
 Ao final desta parte, você deverá conseguir explicar:
 
@@ -16,7 +16,7 @@ Ao final desta parte, você deverá conseguir explicar:
 - onde existem fronteiras de confiança;
 - por que usar MCP não torna uma aplicação segura automaticamente.
 
-Nenhum servidor será implementado ainda. Nesta parte, nosso objetivo é entender as peças antes de programá-las.
+Nenhum servidor será implementado ainda. Nesta parte, nosso objetivo é entender as peças antes de implementar.
 
 ## Afinal, qual problema o MCP resolve?
 
