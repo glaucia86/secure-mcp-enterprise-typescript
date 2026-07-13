@@ -1,5 +1,7 @@
 # Parte 2: Fundamentos e arquitetura do MCP
 
+[← Parte 1: Fundação, escopo e critérios](./01-foundations.md) · [Índice do tutorial](./README.md) · Parte 3: Primeiro MCP Server →
+
 ## O que aprenderemos nesta parte?
 
 Antes de escrever qualquer código, precisamos construir um modelo mental simples do Model Context Protocol (MCP). Isso significa compreender por que ele existe, quais componentes participam da comunicação e qual responsabilidade pertence a cada um.
@@ -109,7 +111,9 @@ sequenceDiagram
 
 Primeiro, o usuário envia a solicitação ao Host. O Host interpreta a intenção com auxílio do LLM e identifica uma Tool apropriada. Em seguida, o MCP Client envia uma mensagem estruturada ao Server. O Server localiza a Tool, executa sua lógica e devolve um resultado. O Client entrega esse resultado ao Host, que decide como utilizá-lo na resposta apresentada ao usuário.
 
-Perceba que o LLM não conversa diretamente com o banco de dados. O MCP Server também não precisa possuir um LLM interno. O Host coordena a utilização do modelo e das capacidades externas.
+Perceba que o LLM não acessa diretamente o banco de dados. O Host utiliza o modelo para compreender a solicitação e coordenar as capacidades disponíveis. Já o MCP Server pode ser um programa TypeScript tradicional: ele recebe uma chamada estruturada, valida os argumentos, executa a lógica autorizada e devolve o resultado.
+
+Portanto, um MCP Server não precisa possuir um LLM interno. Ele somente precisaria utilizar outro modelo caso alguma capacidade oferecida pelo próprio Server dependesse de inteligência artificial. Essa seria uma decisão da aplicação, não uma exigência do MCP.
 
 ## As duas camadas do MCP
 
@@ -119,7 +123,7 @@ Para compreender melhor a comunicação, podemos separar a arquitetura do MCP em
 
 A **data layer**, ou camada de dados, define o significado e o formato das mensagens trocadas. Nela estão o ciclo de vida da conexão, a negociação de capacidades, as Tools, Resources e Prompts, além de solicitações, respostas, erros e notificações.
 
-Essa camada utiliza JSON-RPC 2.0.
+Essa camada utiliza o [JSON-RPC 2.0](https://www.jsonrpc.org/specification) para representar solicitações, respostas, erros e notificações.
 
 ### Camada de transporte: o caminho da mensagem
 
@@ -204,11 +208,15 @@ Esse processo recebe o nome de **capability negotiation**, ou negociação de ca
 
 Em linguagem simples:
 
-> Antes de trabalhar juntos, os dois lados confirmam qual idioma e quais recursos conseguem utilizar.
+> Antes de trabalhar juntos, Client e Server confirmam qual versão do protocolo MCP utilizarão e quais capacidades cada lado suporta.
 
-## As primitivas oferecidas pelo MCP Server
+Essa etapa não negocia o idioma humano, como português ou inglês, nem a linguagem de programação, como TypeScript ou Python. Ela negocia a versão do protocolo e os recursos técnicos disponíveis na conexão.
 
-Uma **primitive**, ou primitiva, é uma forma básica de capacidade definida pelo protocolo. Um MCP Server pode expor três primitivas principais: Tools, Resources e Prompts. Elas não são nomes diferentes para a mesma coisa. Cada uma resolve um tipo específico de necessidade.
+## O que um MCP Server pode oferecer?
+
+O protocolo organiza as capacidades oferecidas por um MCP Server em três grupos principais: Tools, Resources e Prompts. Na terminologia do MCP, esses grupos são chamados de **primitivas do Server**.
+
+Uma **primitive**, ou primitiva, é uma forma básica de capacidade definida pelo protocolo. Tools, Resources e Prompts não são nomes diferentes para a mesma coisa: cada uma resolve um tipo específico de necessidade.
 
 ### Tools: quando precisamos executar algo
 
@@ -319,6 +327,10 @@ Em linguagem simples:
 
 > Sempre que uma informação atravessa de uma parte do sistema para outra, precisamos perguntar se o lado que recebe pode confiar nela.
 
+Para tornar essa ideia concreta, precisamos distinguir **componente** de **zona**. Um componente é uma parte do sistema, como Host, Client, Server ou banco de dados. Uma zona é um ambiente com determinado nível de confiança ou proteção, como o computador do usuário, a rede interna, a Internet ou uma área que armazena dados sensíveis.
+
+Definir uma fronteira clara significa saber onde termina a responsabilidade de uma parte e começa a de outra. Quando uma solicitação sai do Host e chega ao Server, por exemplo, o Server precisa verificar quem enviou, se a operação está autorizada, se os argumentos são válidos e se essa transição precisa ser registrada. A existência de uma conexão técnica não responde automaticamente a essas perguntas.
+
 <p align="center">
   <img src="../resources/trust-boundary.svg" alt="Trust Boundary" />
 </p>
@@ -336,7 +348,16 @@ Até aqui estudamos a arquitetura definida pelo MCP. Agora conseguimos relaciona
 
 Vários pontos do relatório da NSA se aplicam à arquitetura MCP. Entre eles, podemos destacar cinco preocupações que merecem atenção especial:
 
-- O primeiro ponto é a **invocação dinâmica de Tools**. Um _Client_ pode descobrir capacidades em tempo de execução, mas uma _Tool_ nova ou modificada não deveria receber confiança automaticamente.
+- O primeiro ponto é a **descoberta dinâmica de Tools**. Um MCP Client pode consultar o Server e descobrir, durante a execução, quais Tools estão disponíveis. Porém, o simples fato de uma Tool aparecer nessa lista não comprova que ela seja segura. Imagine que ontem o Server oferecia apenas uma Tool de consulta e hoje passou a anunciar outra capaz de exportar dados. O Host não deveria conceder automaticamente à nova Tool as mesmas permissões da anterior. Antes de utilizá-la, seria necessário avaliar sua origem, finalidade, argumentos, permissões e possível impacto.
+
+> Descobrir uma capacidade não significa confiar nela.
+
+```mermaid
+flowchart LR
+    A["Server anuncia uma Tool"] --> B{"A Tool já foi avaliada?"}
+    B -->|"Sim"| C["Aplicar as permissões aprovadas"]
+    B -->|"Não"| D["Bloquear ou solicitar avaliação"]
+```
 
 - O segundo é a **confiança implícita**. O resultado de uma _Tool_ pode passar do _Server_ para o _Host_ e depois ser utilizado pelo LLM ou por outro componente. Se todos presumirem que esse resultado é seguro, uma instrução maliciosa pode se propagar pela cadeia.
 
@@ -357,7 +378,7 @@ Durante o tutorial, manteremos três fontes de decisão separadas. A especifica�
 | Categoria | Exemplo desta parte |
 |---|---|
 | Especificação do MCP | Um Host cria um Client dedicado para cada Server |
-| Recomendação da NSA | Definir fronteiras claras entre componentes e zonas |
+| Recomendação da NSA | Identificar onde dados e comandos atravessam componentes ou ambientes com níveis diferentes de confiança e aplicar controles nessas transições |
 | Decisão do projeto | Começar a implementação usando STDIO |
 | Regra de negócio fictícia | Um usuário só pode consultar casos do seu escopo |
 
@@ -390,6 +411,10 @@ Essas perguntas serão discutidas durante a revisão. Não avançaremos enquanto
 Na Parte 3 criaremos o primeiro MCP Server em TypeScript usando STDIO. Veremos a estrutura mínima do projeto, o SDK oficial, a inicialização, o registro de uma Tool simples e a inspeção das mensagens.
 
 A Parte 3 somente será iniciada após a revisão e aprovação deste texto.
+
+---
+
+[← Voltar para a Parte 1](./01-foundations.md) · [Consultar o índice](./README.md) · Parte 3: Primeiro MCP Server →
 
 ## Referências
 
