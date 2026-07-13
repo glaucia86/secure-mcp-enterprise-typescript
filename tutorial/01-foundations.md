@@ -1,5 +1,7 @@
 # Parte 1: Fundação, escopo e critérios do projeto
 
+Parte anterior · [Índice do tutorial](./README.md) · [Parte 2: Fundamentos e arquitetura do MCP →](./02-mcp-fundamentals.md)
+
 ## O que criaremos?
 
 Criaremos progressivamente um **MCP Server em TypeScript** chamado **Enterprise Risk Knowledge MCP Server**. Ele simulará o acesso a políticas e casos corporativos de risco com diferentes níveis de sensibilidade.
@@ -135,7 +137,11 @@ Começaremos com os fundamentos e um servidor mínimo. Em seguida, adicionaremos
 
 ## Próxima parte
 
-Na Parte 2 (planejada; ver o [índice do tutorial](./README.md)), estudaremos o modelo mental do MCP: host, client, server, tools, resources, prompts, mensagens e transportes. Ainda não adicionaremos controles enterprise antes de compreender o protocolo.
+Na [Parte 2 — Fundamentos e arquitetura do MCP](./02-mcp-fundamentals.md), estudaremos o modelo mental do MCP: Host, Client, Server, Tools, Resources, Prompts, mensagens e transportes. Ainda não adicionaremos controles enterprise antes de compreender o protocolo.
+
+---
+
+Parte anterior · [Consultar o índice](./README.md) · [Seguir para a Parte 2 →](./02-mcp-fundamentals.md)
 
 ## Referências
 

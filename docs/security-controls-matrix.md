@@ -8,7 +8,7 @@ Esta matriz conecta as recomendações do relatório da NSA às decisões que se
 | ID | Recomendação da NSA | Risco tratado | Decisão planejada | Código | Teste/evidência | Status |
 |---|---|---|---|---|---|---|
 | NSA-01 | Escolher projetos MCP suportados | Dependências abandonadas ou vulneráveis | Usar SDK oficial, inventariar versões e automatizar análise de dependências | A definir | A definir | Planejado |
-| NSA-02 | Projetar fronteiras de confiança | Propagação indevida e vazamento entre zonas | Separar tools públicas, internas, restritas e sensíveis | A definir | A definir | Planejado |
+| NSA-02 | Projetar fronteiras de confiança | Propagação indevida e vazamento entre zonas | Separar Host, Clients, Server, Tools e fontes externas; classificar capacidades por sensibilidade | A definir | Parte 2: modelo conceitual documentado | Fundamento documentado; implementação pendente |
 | NSA-03 | Validar parâmetros e contexto | Injection, forwarding e DoS | Schemas estritos, limites, allowlists e rejeição de campos desconhecidos | A definir | A definir | Planejado |
 | NSA-04 | Restringir e isolar execução | RCE, movimento lateral e escalada | Privilégio mínimo, sandbox e egress controlado | A definir | A definir | Planejado |
 | NSA-05 | Assinar e verificar mensagens sensíveis | Tampering, replay e reexecução | Expiração, nonce, idempotência e assinatura no limite apropriado | A definir | A definir | Planejado |
