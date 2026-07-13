@@ -15,7 +15,7 @@ Não apresentaremos código sem explicar qual problema ele resolve. Também não
 | Parte | Tema | Entrega principal | Status |
 |---:|---|---|---|
 | 1 | Fundação, escopo e critérios | README, cenário e matriz inicial | Concluída |
-| 2 | Fundamentos e arquitetura do MCP | Modelo mental de host, client, server e primitives | Planejada |
+| 2 | Fundamentos e arquitetura do MCP | Modelo mental de host, client, server e primitives | Concluída — aguardando revisão |
 | 3 | MCP Server mínimo em TypeScript | Servidor local executável | Planejada |
 | 4 | Enterprise Risk Knowledge | Domínio, tools e dados fictícios | Planejada |
 | 5 | Threat model e trust boundaries | Atores, ativos, fluxos e fronteiras | Planejada |
@@ -45,5 +45,6 @@ Uma parte somente estará concluída quando:
 
 ## Navegação
 
-- [Começar pela Parte 1](./01-foundations.md)
-- [Consultar a matriz de controles](../docs/security-controls-matrix.md)
+- [Parte 1 — Fundação, escopo e critérios](./01-foundations.md)
+- [Parte 2 — Fundamentos e arquitetura do MCP](./02-mcp-fundamentals.md)
+- [Matriz de controles](../docs/security-controls-matrix.md)
