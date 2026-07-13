@@ -20,8 +20,8 @@ A linguagem será acessível para quem ainda não conhece MCP, sem remover a pre
 
 | Parte | Tema | Entrega principal | Status |
 |---:|---|---|---|
-| 1 | Fundação, escopo e critérios | README, cenário e matriz inicial | Concluída |
-| 2 | Fundamentos e arquitetura do MCP | Modelo mental de host, client, server e primitives | Concluída — aguardando revisão |
+| [1](./01-foundations.md) | Fundação, escopo e critérios | README, cenário e matriz inicial | Concluída |
+| [2](./02-mcp-fundamentals.md) | Fundamentos e arquitetura do MCP | Modelo mental de Host, Client, Server e primitivas | Em revisão |
 | 3 | MCP Server mínimo em TypeScript | Servidor local executável | Planejada |
 | 4 | Enterprise Risk Knowledge | Domínio, tools e dados fictícios | Planejada |
 | 5 | Threat model e trust boundaries | Atores, ativos, fluxos e fronteiras | Planejada |
@@ -49,8 +49,8 @@ Uma parte somente estará concluída quando:
 - a matriz de controles estiver atualizada;
 - limitações e itens pendentes estiverem explícitos.
 
-## Navegação
+## Como navegar pelo tutorial?
 
-- [Parte 1 — Fundação, escopo e critérios](./01-foundations.md)
-- [Parte 2 — Fundamentos e arquitetura do MCP](./02-mcp-fundamentals.md)
-- [Matriz de controles](../docs/security-controls-matrix.md)
+Você pode começar pela [Parte 1 — Fundação, escopo e critérios](./01-foundations.md) e seguir para a [Parte 2 — Fundamentos e arquitetura do MCP](./02-mcp-fundamentals.md). No início e no final de cada capítulo, você encontrará atalhos para a parte anterior, para este índice e para a próxima parte disponível.
+
+A [matriz de controles de segurança](../docs/security-controls-matrix.md) acompanha a evolução do projeto e conecta recomendações, decisões, implementações e evidências. As partes planejadas ganharão links somente quando seus respectivos arquivos forem criados.
