@@ -13,7 +13,7 @@
 
 <br />
 
-Um projeto educacional, construído passo a passo, para compreender o **Model Context Protocol (MCP)** e aplicar controles de segurança inspirados no guia publicado pela **NSA**.
+Um projeto educacional, criado passo a passo, para compreender o **Model Context Protocol (MCP)** e aplicar controles de segurança inspirados no guia publicado pela **NSA**.
 
 [📚 Começar o tutorial](./tutorial/README.md) · [🧭 Ver o roteiro](#-roteiro-de-aprendizado) · [🛡️ Consultar a matriz de controles](./docs/security-controls-matrix.md)
 
@@ -25,12 +25,12 @@ Um projeto educacional, construído passo a passo, para compreender o **Model Co
 
 Conectar aplicações de inteligência artificial a dados e ações externas é poderoso, mas também cria novas fronteiras de confiança. Uma integração pode funcionar tecnicamente e, ainda assim, permitir acesso indevido, aceitar entradas maliciosas ou executar ações com privilégios excessivos.
 
-Este repositório acompanha a construção progressiva de um **MCP Server em TypeScript** chamado **Enterprise Risk Knowledge MCP Server**. Além de mostrar como o protocolo funciona, o tutorial explica por que cada decisão de segurança existe, onde ela deve ser aplicada e como podemos testá-la.
+Este repositório acompanha a criação progressiva de um **MCP Server em TypeScript** chamado **Enterprise Risk Knowledge MCP Server**. Além de mostrar como o protocolo funciona, o tutorial explica por que cada decisão de segurança existe, onde ela deve ser aplicada e como podemos testar.
 
 A proposta é aprender fazendo: primeiro entendemos o problema em linguagem simples; depois apresentamos o termo técnico; por fim, relacionamos o conceito ao código e às recomendações de segurança.
 
 > [!IMPORTANT]
-> Este é um projeto independente e educacional. Ele não representa certificação, homologação ou conformidade oficial da NSA. O relatório apresenta riscos e recomendações; as decisões arquiteturais e implementações deste repositório são interpretações técnicas documentadas durante o tutorial.
+> Este é um projeto independente e educacional. Ele não representa certificação, homologação ou conformidade oficial da NSA. O relatório apresenta riscos e recomendações. As decisões arquiteturais e implementações deste repositório são interpretações técnicas documentadas durante o tutorial.
 
 ## 🧠 O que você aprenderá?
 
@@ -139,7 +139,7 @@ Antes de contribuir, considere que cada decisão de segurança deve indicar sua 
 
 ### Glaucia Lemos
 
-Software Engineer • JavaScript/TypeScript • Inteligência Artificial • Cloud • Open Source
+Principal Software Engineer | Transformation Lead @ Itau • JavaScript/TypeScript • Inteligência Artificial • Cloud • Open Source
 
 [![GitHub](https://img.shields.io/badge/GitHub-glaucia86-181717?style=for-the-badge&logo=github)](https://github.com/glaucia86)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Glaucia%20Lemos-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/glaucialemos/)
