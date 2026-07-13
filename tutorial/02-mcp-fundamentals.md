@@ -343,7 +343,7 @@ A resposta segura não é simplesmente “sim, podemos confiar”. Cada transiç
 
 ## Relação com o relatório da NSA
 
-Até aqui estudamos a arquitetura definida pelo MCP. Agora conseguimos relacionar sobre a perspectiva de segurança, conforme às preocupações descritas pelo NSA.
+Até aqui estudamos a arquitetura definida pelo MCP. Agora conseguimos relacionar a perspectiva de segurança às preocupações descritas pela NSA.
 
 Vários pontos do relatório da NSA se aplicam à arquitetura MCP. Entre eles, podemos destacar cinco preocupações que merecem atenção especial:
 
