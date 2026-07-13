@@ -14,7 +14,7 @@ Não apresentaremos código sem explicar qual problema ele resolve. Também não
 
 | Parte | Tema | Entrega principal | Status |
 |---:|---|---|---|
-| 1 | Fundação, escopo e critérios | README, cenário e matriz inicial | Concluída — aguardando merge |
+| 1 | Fundação, escopo e critérios | README, cenário e matriz inicial | Concluída |
 | 2 | Fundamentos e arquitetura do MCP | Modelo mental de host, client, server e primitives | Planejada |
 | 3 | MCP Server mínimo em TypeScript | Servidor local executável | Planejada |
 | 4 | Enterprise Risk Knowledge | Domínio, tools e dados fictícios | Planejada |
