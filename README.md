@@ -51,7 +51,7 @@ Cada parte do tutorial seguirá o mesmo encadeamento:
 
 ## Status
 
-**Parte 1 em elaboração:** fundação documental. Ainda não existe implementação do MCP Server.
+**Parte 1 concluída:** fundação documental pronta para revisão. Ainda não existe implementação do MCP Server.
 
 ## Autora
 

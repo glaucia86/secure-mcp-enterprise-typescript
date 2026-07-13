@@ -52,10 +52,34 @@ A empresa fictícia **Northstar Financial Services** mantém políticas corporat
 
 | Tool | Classificação inicial | Propósito | Risco principal |
 |---|---|---|---|
-| `public.get_policy_summary` | Pública | Resumir políticas públicas | Instruções maliciosas escondidas no conteúdo |
-| `risk.search_cases` | Interna | Pesquisar casos permitidos | Exposição de casos pertencentes a outro escopo |
-| `risk.get_case_details` | Restrita | Consultar detalhes de um caso | Acesso a casos sem a permissão necessária |
-| `risk.export_case_report` | Sensível | Exportar relatório | Exportação de dados sem autorização ou aprovação |
+| `public.get_policy_summary` | Pública | Consultar o resumo previamente armazenado de uma política pública | Instruções maliciosas escondidas no conteúdo |
+| `risk.search_cases` | Interna | Pesquisar casos permitidos para o usuário | Exposição de casos pertencentes a outro escopo |
+| `risk.get_case_details` | Restrita | Consultar detalhes de um caso específico | Acesso ao caso sem a permissão necessária |
+| `risk.export_case_report` | Sensível | Exportar um relatório de risco | Exportação de dados sem autorização ou aprovação |
+
+### Por que uma tool pública também apresenta riscos?
+
+A classificação **pública** significa que o conteúdo pode ser consultado sem uma autorização especial. Isso não garante que o conteúdo esteja correto ou seja seguro.
+
+A `public.get_policy_summary` retornará um resumo previamente armazenado; ela não utilizará outro LLM para produzir o resumo. Mesmo assim, o conteúdo pode ter sido alterado e conter instruções maliciosas escondidas. Caso um cliente ou agente interprete essas instruções como comandos, poderá ocorrer uma **indirect prompt injection**.
+
+> Dado público não é sinônimo de dado confiável.
+
+Usaremos primeiro a explicação em linguagem simples. Os termos técnicos serão introduzidos depois que o problema estiver claro.
+
+### O que significa falha no controle de acesso?
+
+Uma falha no controle de acesso acontece quando o sistema não verifica corretamente se a pessoa tem permissão para acessar um dado ou executar uma ação.
+
+Por exemplo, uma pessoa pode estar autenticada e ainda assim tentar consultar um caso pertencente a outra região ou equipe. Se `risk.get_case_details` devolver o caso apenas porque o identificador existe, ocorreu uma falha no controle de acesso, conhecida tecnicamente como **Broken Access Control**.
+
+| Conceito | Pergunta respondida |
+|---|---|
+| Autenticação | Quem é você? |
+| Autorização | O que você pode acessar ou executar? |
+| Controle de acesso | A regra de autorização foi realmente aplicada? |
+
+Essa distinção será implementada e testada nas partes posteriores.
 
 Os nomes, usuários, políticas e casos serão inteiramente fictícios.
 
