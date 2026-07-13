@@ -40,6 +40,7 @@ Cada parte do tutorial seguirá o mesmo encadeamento:
 
 - [Índice do tutorial](./tutorial/README.md)
 - [Parte 1 — Fundação, escopo e critérios](./tutorial/01-foundations.md)
+- [Parte 2 — Fundamentos e arquitetura do MCP](./tutorial/02-mcp-fundamentals.md)
 - [Matriz de controles de segurança](./docs/security-controls-matrix.md)
 
 ## Fontes primárias
@@ -51,7 +52,7 @@ Cada parte do tutorial seguirá o mesmo encadeamento:
 
 ## Status
 
-**Parte 1 concluída:** fundação documental pronta para revisão. Ainda não existe implementação do MCP Server.
+**Parte 2 concluída e aguardando revisão:** fundamentos e arquitetura documentados. Ainda não existe implementação do MCP Server.
 
 ## Autora
 
